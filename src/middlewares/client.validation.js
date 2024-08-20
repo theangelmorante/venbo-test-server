@@ -1,12 +1,11 @@
 const { body, param, validationResult, query } = require("express-validator");
 
 const validateCreateClient = [
-  // Validar que 'identification' es obligatorio y de tipo string
   body("identification")
     .notEmpty()
-    .withMessage("Client Credit ID is required")
+    .withMessage("Client identification is required")
     .isString()
-    .withMessage("Client Credit ID must be a string"),
+    .withMessage("Client identification must be a string"),
 
   // Validar que 'firstName' es obligatorio y de tipo string
   body("firstName")

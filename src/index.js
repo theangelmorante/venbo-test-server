@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const clientsRoutes = require("./routes/clients");
+const authRoutes = require("./routes/auth");
 const errorMiddleware = require("./middlewares/error.middleware");
 
 const app = express();
@@ -17,8 +18,11 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
-app.use("/api/client", clientsRoutes);
+app.use("/clients", clientsRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+
+module.exports = app;

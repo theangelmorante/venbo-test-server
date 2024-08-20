@@ -1,4 +1,4 @@
-const { sendEmail } = require("../../services/emailService");
+const { sendEmail } = require("../../../services/emailService");
 
 // Envío de correo de bienvenida
 const sendWelcomeEmail = async (email) => {

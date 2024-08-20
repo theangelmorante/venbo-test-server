@@ -4,7 +4,7 @@ const {
   validateEmployeeAssociation,
   validateUniqueEmail,
   validateRegistrationDate,
-  validateAddressFormat,
+  validateUniqueIdentification,
 } = require("./utils/validations");
 const { sendWelcomeEmail } = require("./utils/actions");
 
@@ -13,6 +13,8 @@ const createClient = async (req, res) => {
   try {
     const clientData = req.body;
 
+    await validateUniqueIdentification(clientData.identification);
+
     await verifyCompanyCreditStatus(clientData);
 
     await validateEmployeeAssociation(clientData.employees);
@@ -20,8 +22,6 @@ const createClient = async (req, res) => {
     await validateUniqueEmail(clientData.email);
 
     validateRegistrationDate(clientData.registrationDate);
-
-    validateAddressFormat(clientData.address);
 
     const client = new Client(clientData);
     await client.save();
@@ -38,7 +38,6 @@ const createClient = async (req, res) => {
 const getAllClients = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
-
     const clients = await Client.find()
       .limit(limit * 1)
       .skip((page - 1) * limit)

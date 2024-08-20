@@ -1,5 +1,5 @@
-const Client = require("../../models/client.model");
-const { checkCreditStatus } = require("../../services/creditService");
+const Client = require("../../../models/client.model");
+const { checkCreditStatus } = require("../../../services/creditService");
 
 const findEmployeenAssociatedWithAnotherClient = async (
   employees,
@@ -57,30 +57,11 @@ const validateRegistrationDate = (registrationDate) => {
   }
 };
 
-const validateAddressFormat = (address) => {
-  const addressRegex = /\d+\s[A-Za-z]+\s[A-Za-z]+/; // Ejemplo de regex que requiere un número y al menos dos palabras
-  if (!addressRegex.test(address)) {
-    throw new Error(
-      "Address format is invalid. Please include a street number and name."
-    );
+const validateUniqueIdentification = async (identification) => {
+  const existingClient = await Client.findOne({ identification });
+  if (existingClient) {
+    throw new Error("A client with this identification already exists.");
   }
-};
-
-const validateRequiredFields = (clientData) => {
-  const requiredFields = [
-    "id",
-    "firstName",
-    "lastName",
-    "email",
-    "address",
-    "type",
-  ];
-
-  requiredFields.forEach((field) => {
-    if (!clientData[field]) {
-      throw new Error(`Field ${field} is required.`);
-    }
-  });
 };
 
 module.exports = {
@@ -88,6 +69,5 @@ module.exports = {
   verifyCompanyCreditStatus,
   validateUniqueEmail,
   validateRegistrationDate,
-  validateAddressFormat,
-  validateRequiredFields,
+  validateUniqueIdentification,
 };
