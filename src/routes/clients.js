@@ -6,6 +6,7 @@ const {
   validateCreateClient,
   validateIdParam,
   validatePagination,
+  validateUpdateClient,
 } = require("../middlewares/client.validation");
 
 // Routes
@@ -34,6 +35,7 @@ router.put(
   "/:id",
   authMiddleware,
   validateIdParam,
+  validateUpdateClient,
   clientController.updateClientById
 );
 

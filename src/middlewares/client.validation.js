@@ -94,8 +94,39 @@ const validatePagination = [
   },
 ];
 
+const validateUpdateClient = [
+  // Campos opcionales para la actualización
+  body("firstName")
+    .optional()
+    .isString()
+    .withMessage("First name must be a string"),
+  body("lastName")
+    .optional()
+    .isString()
+    .withMessage("Last name must be a string"),
+  body("email").optional().isEmail().withMessage("Email format is invalid"),
+  body("address").optional().isString().withMessage("Address must be a string"),
+  body("type")
+    .optional()
+    .isIn(["PERSON", "COMPANY"])
+    .withMessage("Type must be either PERSON or COMPANY"),
+  body("registrationDate")
+    .optional()
+    .isISO8601()
+    .withMessage("Registration date must be a valid date"),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
+
 module.exports = {
   validateCreateClient,
   validateIdParam,
   validatePagination,
+  validateUpdateClient,
 };

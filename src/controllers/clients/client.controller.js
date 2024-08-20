@@ -72,7 +72,8 @@ const getClientById = async (req, res) => {
 // Update a client by ID
 const updateClientById = async (req, res) => {
   try {
-    const { employees, email } = req.body;
+    const updates = req.body;
+    const { employees, email } = updates;
 
     await validateEmployeeAssociation(employees);
 
@@ -80,7 +81,7 @@ const updateClientById = async (req, res) => {
 
     const client = await Client.findOneAndUpdate(
       { id: req.params.id },
-      req.body,
+      { $set: updates },
       { new: true, runValidators: true }
     );
 
