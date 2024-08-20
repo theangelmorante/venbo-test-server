@@ -58,7 +58,7 @@ const getAllClients = async (req, res) => {
 // Get a client by ID
 const getClientById = async (req, res) => {
   try {
-    const client = await Client.findOne({ id: req.params.id });
+    const client = await Client.findOne({ _id: req.params.id });
     if (!client) {
       return res.status(404).send({ error: "Client not found" });
     }
@@ -73,13 +73,12 @@ const updateClientById = async (req, res) => {
   try {
     const updates = req.body;
     const { employees, email } = updates;
-
-    await validateEmployeeAssociation(employees);
+    if (employees?.length) await validateEmployeeAssociation(employees);
 
     await validateUniqueEmail(email);
 
     const client = await Client.findOneAndUpdate(
-      { id: req.params.id },
+      { _id: req.params.id },
       { $set: updates },
       { new: true, runValidators: true }
     );
@@ -97,7 +96,7 @@ const updateClientById = async (req, res) => {
 // Delete a client by ID
 const deleteClientById = async (req, res) => {
   try {
-    const client = await Client.findOneAndDelete({ id: req.params.id });
+    const client = await Client.findOneAndDelete({ _id: req.params.id });
     if (!client) {
       return res.status(404).send({ error: "Client not found" });
     }

@@ -105,10 +105,6 @@ const validateUpdateClient = [
     .withMessage("Last name must be a string"),
   body("email").optional().isEmail().withMessage("Email format is invalid"),
   body("address").optional().isString().withMessage("Address must be a string"),
-  body("type")
-    .optional()
-    .isIn(["PERSON", "COMPANY"])
-    .withMessage("Type must be either PERSON or COMPANY"),
   body("registrationDate")
     .optional()
     .isISO8601()
