@@ -4,13 +4,15 @@ const mongoose = require("mongoose");
 const clientsRoutes = require("./routes/clients");
 const authRoutes = require("./routes/auth");
 const errorMiddleware = require("./middlewares/error.middleware");
+const setupSwaggerDocs = require("./swagger"); // Importa Swagger
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Middleware de Errores
+setupSwaggerDocs(app);
+
 app.use(errorMiddleware);
 
 mongoose

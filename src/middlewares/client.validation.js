@@ -7,48 +7,41 @@ const validateCreateClient = [
     .isString()
     .withMessage("Client identification must be a string"),
 
-  // Validar que 'firstName' es obligatorio y de tipo string
   body("firstName")
     .notEmpty()
     .withMessage("First name is required")
     .isString()
     .withMessage("First name must be a string"),
 
-  // Validar que 'lastName' es obligatorio y de tipo string
   body("lastName")
     .notEmpty()
     .withMessage("Last name is required")
     .isString()
     .withMessage("Last name must be a string"),
 
-  // Validar que 'email' es obligatorio, de tipo string y con formato válido
   body("email")
     .notEmpty()
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Email format is invalid"),
 
-  // Validar que 'address' es obligatorio y de tipo string
   body("address")
     .notEmpty()
     .withMessage("Address is required")
     .isString()
     .withMessage("Address must be a string"),
 
-  // Validar que 'type' es obligatorio y debe ser 'PERSON' o 'COMPANY'
   body("type")
     .notEmpty()
     .withMessage("Type is required")
     .isIn(["PERSON", "COMPANY"])
     .withMessage("Type must be either PERSON or COMPANY"),
 
-  // Validar que 'registrationDate' es opcional pero si está presente debe ser una fecha válida
   body("registrationDate")
     .optional()
     .isISO8601()
     .withMessage("Registration date must be a valid date"),
 
-  // Verificar errores de validación
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -94,7 +87,6 @@ const validatePagination = [
 ];
 
 const validateUpdateClient = [
-  // Campos opcionales para la actualización
   body("firstName")
     .optional()
     .isString()
