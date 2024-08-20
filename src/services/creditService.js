@@ -1,5 +1,10 @@
 const axios = require("axios");
 
+/**
+ * Check the credit status of a client
+ * @param {string} clientId Client ID
+ * @returns {Object} Credit status object
+ */
 const checkCreditStatus = async (clientId) => {
   try {
     const response = await axios.get(

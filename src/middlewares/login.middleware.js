@@ -1,4 +1,9 @@
-// src/middlewares/validateLogin.js
+/**
+ * Validate login request
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ * @param {Function} next Callback function
+ */
 const validateLogin = (req, res, next) => {
   const { username, password } = req.body;
 

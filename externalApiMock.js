@@ -3,11 +3,14 @@ const express = require("express");
 const app = express();
 const port = 4000;
 
-// Simulación de respuestas del API externo
+/**
+ * Endpoint to check the credit status of a client
+ * @param {string} clientId Client ID
+ * @returns {Object} Credit status object
+ */
 app.get("/credits/:clientId", (req, res) => {
   const { clientId } = req.params;
   console.log(`Request received for clientId: ${clientId}`);
-  // Simulación de diferentes estados de crédito basado en el clientId
   if (Number(clientId) % 2 === 0) {
     res.json({
       isEligible: true,

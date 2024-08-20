@@ -8,7 +8,11 @@ const {
 } = require("./utils/validations");
 const { sendWelcomeEmail } = require("./utils/actions");
 
-// Método principal para crear un nuevo cliente
+/**
+ * Create a new client
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const createClient = async (req, res) => {
   try {
     const clientData = req.body;
@@ -34,7 +38,11 @@ const createClient = async (req, res) => {
   }
 };
 
-// Get all clients
+/**
+ * Find all clients
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const getAllClients = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
@@ -55,7 +63,11 @@ const getAllClients = async (req, res) => {
   }
 };
 
-// Get a client by ID
+/**
+ * Find a client by ID
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const getClientById = async (req, res) => {
   try {
     const client = await Client.findOne({ _id: req.params.id });
@@ -68,7 +80,11 @@ const getClientById = async (req, res) => {
   }
 };
 
-// Update a client by ID
+/**
+ * Update a client by ID
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const updateClientById = async (req, res) => {
   try {
     const updates = req.body;
@@ -93,7 +109,11 @@ const updateClientById = async (req, res) => {
   }
 };
 
-// Delete a client by ID
+/**
+ * Delete a client by ID
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const deleteClientById = async (req, res) => {
   try {
     const client = await Client.findOneAndDelete({ _id: req.params.id });

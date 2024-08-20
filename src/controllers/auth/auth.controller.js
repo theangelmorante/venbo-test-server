@@ -1,5 +1,10 @@
 const { generateToken } = require("./utils/jwt");
 
+/**
+ * Login the user
+ * @param {Object} req Request object
+ * @param {Object} res Response object
+ */
 const login = (req, res) => {
   const { username, password } = req.body;
 
