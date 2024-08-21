@@ -5,9 +5,12 @@ const clientsRoutes = require("./routes/clients");
 const authRoutes = require("./routes/auth");
 const errorMiddleware = require("./middlewares/error.middleware");
 const setupSwaggerDocs = require("./swagger"); // Importa Swagger
+const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.use(express.json());
 

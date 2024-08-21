@@ -88,11 +88,6 @@ const getClientById = async (req, res) => {
 const updateClientById = async (req, res) => {
   try {
     const updates = req.body;
-    const { employees, email } = updates;
-    if (employees?.length) await validateEmployeeAssociation(employees);
-
-    await validateUniqueEmail(email);
-
     const client = await Client.findOneAndUpdate(
       { _id: req.params.id },
       { $set: updates },
