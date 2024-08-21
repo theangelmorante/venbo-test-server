@@ -8,7 +8,7 @@ const secret = process.env.JWT_SECRET || "your_jwt_secret";
  * @returns {string} JWT token
  */
 const generateToken = (username) => {
-  return jwt.sign({ username }, secret, { expiresIn: "1h" });
+  return jwt.sign({ username }, secret, { expiresIn: "24h" });
 };
 
 module.exports = {
