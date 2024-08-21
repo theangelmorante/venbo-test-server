@@ -45,7 +45,8 @@ Start the server
 
 #### Pay Attention Here:
 
-For this implementations we need to run start:dev:all because I have an externalApiMock.js to simulate credit api validation, and that mock need to run concurrently with the main server
+For this implementations we need to run start:dev:all because I have an externalApiMock.js to simulate credit api validation, and that mock need to run concurrently with the main server.
+The External Api Mock, to simulate the behavior of a credit evaluation, when sending a numeric string as identification, it is converted to a number and if the number is even, the credit is valid, otherwise, it is not.
 
 ## License
 
